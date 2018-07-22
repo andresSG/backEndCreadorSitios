@@ -20,6 +20,16 @@ form {
 	border: 1px solid rgba(0,0,0,0.2);
 }
 
+div.central {
+	margin: auto;
+	width: 50%;
+	height: 70%;
+	max-width: 500px;
+	background: #F3F3F3;
+	padding: 30px;
+	border: 1px solid rgba(0,0,0,0.2);
+}
+
 h2 {
 	text-align: center;
 	margin-bottom: 20px;
@@ -57,10 +67,18 @@ input[type="submit"]:active{
 	form{
 		width:75%;
 	}
+	
+	div.central{
+		width:75%;
+	}
 }
 
 @media (max-width:480px){
 	form{
+		width:95%;
+	}
+	
+	div.central{
 		width:95%;
 	}
 }
