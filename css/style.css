@@ -120,7 +120,7 @@ input[type="submit"]:active{
   transition: all .2s ease-in;
 }
 
-i {
+.footer i {
 	color: #ff8d0c;
 }
 

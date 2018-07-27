@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php
+session_start();
+
+if ($_SESSION["logueado"] == TRUE) {
+	?>
 <html lang="es">
 	<head>
 		<meta charset="UTF-8">
@@ -12,12 +17,10 @@
 	</head>
 	<body id="bd">
 		<div class="central">
-			<form action="test.php" method="post">
-				<h2>Formulario de acceso</h2>
-				<input type="text" name="user01" placeholder="&#9919;  Usuario">
-				<input type="text" name="pass01" placeholder="&#9919;  Password">
-				<input type="submit" name="" value="login">
-			</form>
+			<h2>Administración website</h2>
+			<a href="#" title="Edit Text"> <i class="fas fa-edit fa-2x"> Editar Textos</i></a> <br><br>
+			<a href="#" title="Edit Img"> <i class="fas fa-images fa-2x"> Editar Imagenes</i></a> <br><br>
+			<a href="#" title="Edit Users Adm"> <i class="fas fa-user-shield fa-2x"> Editar User Admin</i></a>
 		</div>
 	</body>
 	<div class="footer">
@@ -34,4 +37,12 @@
     	</div>
 
 	</div>
+
+	<?php
+
+} else {
+	header("Location: .\index.html");
+}
+
+?>
 </html>
