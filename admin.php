@@ -36,6 +36,10 @@ if ($_SESSION["logueado"] == TRUE) {
         	<i class="fas fa-moon"></i>
     	</div>
 
+    	<div class="exit">
+        	<a href="salir.php" title="Exit"><i class="fas fa-door-open"> &nbsp Exit</i></a>
+    	</div>
+
 	</div>
 
 	<?php

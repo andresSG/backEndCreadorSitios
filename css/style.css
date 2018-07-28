@@ -128,6 +128,10 @@ input[type="submit"]:active{
     background-position: 0 0;
 }
 
+.exit{
+	margin-left: 50px;
+}
+
 
 /* custom checkbox*/
 .switch {

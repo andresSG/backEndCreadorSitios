@@ -3,9 +3,12 @@
 <?php
 session_start();
 
-if ($_SESSION["logueado"] == TRUE) {
-	Header("Location: admin.php");
+if (!empty($_SESSION["logueado"])) {
+	if ($_SESSION["logueado"] == TRUE) {
+		Header("Location: admin.php");
+	}
 }
+
 ?>
 	<head>
 		<meta charset="UTF-8">
@@ -24,6 +27,13 @@ if ($_SESSION["logueado"] == TRUE) {
 				<input type="text" name="user01" placeholder="&#9919;  Usuario">
 				<input type="password" name="pass01" placeholder="&#9919;  Password">
 				<input type="submit" name="submit" value="login">
+				<?php
+if (isset($_GET["error"])) {
+	if ($_GET["error"] == 'login') {
+		echo "<br><p class='error'><i class='fas fa-exclamation-circle'></i> &nbsp Usuario y / o Contrasea erroneos. Intentelo de nuevo.</p>";
+	}
+}
+?>
 			</form>
 		</div>
 	</body>
