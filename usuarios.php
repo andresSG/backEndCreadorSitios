@@ -13,14 +13,14 @@ if ($_SESSION["logueado"] == TRUE) {
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 		<script type="text/javascript" src="./js/funciones-basic.js"></script>
 
-		<title>Panel Administración</title>
+		<title>Cuentas usuarios</title>
 	</head>
 	<body id="bd">
 		<div class="central">
-			<h2>Administración website</h2>
-			<a href="#" title="Edit Text"> <i class="fas fa-edit fa-2x"> Editar Textos</i></a> <br><br>
-			<a href="#" title="Edit Img"> <i class="fas fa-images fa-2x"> Editar Imagenes</i></a> <br><br>
-			<a href="usuarios.php" title="Edit Users Adm"> <i class="fas fa-user-shield fa-2x"> Editar User Admin</i></a>
+			<h2>Usuarios</h2>
+			<form action="usuario" method="get" accept-charset="utf-8">
+
+			</form>
 		</div>
 	</body>
 	<div class="footer">

@@ -73,6 +73,9 @@ input[type="submit"]:active{
 }
 
 @media (max-width:480px){
+	body{
+		transition: all .06s ease-in;
+	}
 	form{
 		width:95%;
 	}
@@ -83,8 +86,8 @@ input[type="submit"]:active{
 }
 
 .footer {
-	padding: 3px;
-	padding-left: 10px;
+	padding-top: 6px;
+	padding-bottom: 6px;
 	position: fixed;
 	opacity: 0.6;
 	left: 0;
@@ -92,7 +95,7 @@ input[type="submit"]:active{
 	display: flex;
 	flex-direction: row;
 	width: 100%;
-	line-height: 12px;
+	line-height: 16px;
 	background-color: #281750;
 	color: white;	
 }
@@ -112,8 +115,12 @@ input[type="submit"]:active{
 	font-size: 1.2rem;
 	color: white;
     display: flex;
-    margin-left: 20vh;
+    margin-left: 12vw;
   	align-items: center;
+}
+
+.footer .exit{
+	margin-left: 12vw;
 }
 
 .mode-n > i{
@@ -126,10 +133,6 @@ input[type="submit"]:active{
 
 .night{
     background-position: 0 0;
-}
-
-.exit{
-	margin-left: 50px;
 }
 
 

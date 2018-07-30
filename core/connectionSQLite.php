@@ -41,5 +41,52 @@ class connectionSQLite {
 		return false;
 	}
 
+	function getUsers() {
+		$querya = $this->getConn()->prepare('SELECT id, full_name, password FROM users ;');
+
+		$querya->execute();
+
+		$row = $querya->fetch();
+
+		if (is_null($row[1]) or empty($row[1]) or !isset($row[1])) {
+			return false;
+		} elseif (isset($row[1]) and !is_null($row[1])) {
+			return $row;
+		}
+		return false;
+	}
+
+	function getUser($user) {
+		$querya = $this->getConn()->prepare('SELECT id, full_name, password FROM users ;');
+
+		$querya->execute();
+
+		$row = $querya->fetch();
+
+		if (is_null($row[1]) or empty($row[1]) or !isset($row[1])) {
+			return false;
+		} elseif (isset($row[1]) and !is_null($row[1])) {
+			return $row[1];
+		}
+		return false;
+	}
+
+	function addUser($user, $pass) {
+		$querya = $this->getConn()->prepare('insert into users (full_name, password) values (:id, :pass);');
+
+		$querya->bindValue(':id', $user);
+		$querya->bindValue(':pass', $pass);
+
+		return $querya->execute();
+	}
+
+	function removeUser($user) {
+		$querya = $this->getConn()->prepare('delete from users where full_name = :id ;');
+
+		$querya->bindValue(':id', $user);
+
+		return $querya->execute();
+	}
+
 }
 ?>
