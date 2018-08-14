@@ -19,7 +19,18 @@ if ($_SESSION["logueado"] == TRUE) {
 		<div class="central">
 			<h2>Usuarios</h2>
 			<form action="usuario" method="get" accept-charset="utf-8">
-
+			<script type="text/javascript">
+				<?php
+require 'core/connectionSQLite.php';
+	$conn = new connectionSQLite('.');
+	$usuarios = $conn->getUsers();
+	?>
+				var arr = <?php echo json_encode($usuarios); ?>;
+				//obtengo los datos sqlite desde php y los paso variable Javascript
+				for (var i = 0; i < (arr.length); i++) {//recorremos array
+					document.write("("+arr[i]["id"] +") - " + arr[i]["full_name"] +"<br>");
+				}
+			</script>
 			</form>
 		</div>
 	</body>

@@ -42,22 +42,21 @@ class connectionSQLite {
 	}
 
 	function getUsers() {
-		$querya = $this->getConn()->prepare('SELECT id, full_name, password FROM users ;');
+		$querya = $this->getConn()->prepare('SELECT id, full_name, password, role FROM users ;');
 
 		$querya->execute();
 
-		$row = $querya->fetch();
-
-		if (is_null($row[1]) or empty($row[1]) or !isset($row[1])) {
+		$row = $querya->fetchAll(PDO::FETCH_ASSOC);
+		if (is_null($row) or empty($row) or !isset($row)) {
 			return false;
-		} elseif (isset($row[1]) and !is_null($row[1])) {
+		} elseif (isset($row) and !is_null($row)) {
 			return $row;
 		}
 		return false;
 	}
 
 	function getUser($user) {
-		$querya = $this->getConn()->prepare('SELECT id, full_name, password FROM users ;');
+		$querya = $this->getConn()->prepare('SELECT id, full_name, password, role FROM users ;');
 
 		$querya->execute();
 
@@ -72,9 +71,9 @@ class connectionSQLite {
 	}
 
 	function addUser($user, $pass) {
-		$querya = $this->getConn()->prepare('insert into users (full_name, password) values (:id, :pass);');
+		$querya = $this->getConn()->prepare('insert into users (full_name, password) values (:user, :pass);');
 
-		$querya->bindValue(':id', $user);
+		$querya->bindValue(':user', $user);
 		$querya->bindValue(':pass', $pass);
 
 		return $querya->execute();
