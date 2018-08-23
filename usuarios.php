@@ -18,20 +18,49 @@ if ($_SESSION["logueado"] == TRUE) {
 	<body id="bd">
 		<div class="central">
 			<h2>Usuarios</h2>
-			<form action="usuario" method="get" accept-charset="utf-8">
-			<script type="text/javascript">
-				<?php
-require 'core/connectionSQLite.php';
+			<script type='text/javascript'>
+<?php
+
+	require 'core/connectionSQLite.php';
 	$conn = new connectionSQLite('.');
 	$usuarios = $conn->getUsers();
 	?>
-				var arr = <?php echo json_encode($usuarios); ?>;
-				//obtengo los datos sqlite desde php y los paso variable Javascript
-				for (var i = 0; i < (arr.length); i++) {//recorremos array
-					document.write("("+arr[i]["id"] +") - " + arr[i]["full_name"] +"<br>");
-				}
+			var arr = <?php echo json_encode($usuarios); ?>;
+
+			document.write("<div class='usuarios'>");
+			for (var i = 0; i < (arr.length); i++) {
+				document.write("<div class='user' id='u_"+arr[i]["id"]+"' >");
+				document.write("<name_u> " + arr[i]["full_name"] +"</name_u>");
+				document.write("<form action='./core/users.php' method='POST' accept-charset='utf-8'>");
+				document.write("<input type='hidden' value='"+arr[i]["id"]+"' name='edit'>");
+				document.write("<button id='btEditar' name='btEditar' class='btn btEditar'><i class='fas fa-angle-down fa-3x'></i> Editar </button>");
+				document.write("<div class='divedit'>");
+				document.write("<input type='Password' class='ocult' name='lastPW' id='lastPW' placeholder='Last Password'>");
+				document.write("<input type='Password' class='ocult' name='newPW' id='newPW' placeholder='New Password'>");
+				document.write("<button id='"+arr[i]["id"]+"' type='submit' value='"+arr[i]["full_name"]+"' name='edit-sn' class='btn btn-success ocult'><i id='"+arr[i]["id"]+"' name='"+arr[i]["full_name"]+"' class='fas fa-user-edit fa-2x'></i> Guardar Cambios </button>");
+				document.write("</div>");
+				document.write("</form>");
+
+				document.write("<form action='./core/users.php' method='POST' accept-charset='utf-8'>");
+				document.write("<input type='hidden' value='"+arr[i]["id"]+"' name='delete'>");
+				document.write("<button id='"+arr[i]["id"]+"' type='submit' name='delete-sn' class='btn btn-success'><i id='"+arr[i]["id"]+"' class='fas fa-user-times fa-2x'></i> Borrar </button>");
+				document.write("</form>");
+				document.write("</div>");
+				document.write("<hr>");
+			}
+			document.write("</div>");
 			</script>
-			</form>
+
+			<?php
+if (isset($_GET["d"])) {
+		if ($_GET["d"] == 1) {
+			echo "<br><p class='error'><i class='fas fa-exclamation-circle'></i> &nbsp No se ha podido completar la acción de borrar.</p>";
+		} else {
+			echo "<br><p class='info'><i class='far fa-thumbs-up'></i> &nbsp Se completo acción</p>";
+		}
+	}
+	?>
+
 		</div>
 	</body>
 	<div class="footer">
@@ -56,7 +85,7 @@ require 'core/connectionSQLite.php';
 	<?php
 
 } else {
-	header("Location: .\index.html");
+	header("Location: .\index.php");
 }
 
 ?>

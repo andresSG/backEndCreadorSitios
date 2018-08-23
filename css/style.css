@@ -21,12 +21,18 @@ body {
 
 div.central {
 	margin: auto;
-	width: 50%;
+	width: 70%;
 	height: 80%;
-	max-width: 500px;
+	max-width: 800px;
 	background: #F3F3F3;
 	padding: 30px;
 	border: 1px solid rgba(0,0,0,0.2);
+}
+
+div.divedit{
+	display: flex;
+	margin-left: -70px;
+	margin-top: 7px
 }
 
 h2 {
@@ -35,10 +41,36 @@ h2 {
 	color:rgba(0,0,0,0.5);
 }
 
+name_u {
+	margin-right: 6%;
+	font-size: 18px;
+}
+
+hr {
+  margin-bottom: 1%;
+  height: 1px;
+  border: 0; 
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+button{
+	width: 90px;
+	height: 50px;
+	padding: 2%;
+}
+
+button.ocult{
+	width: 90px;
+	height: 74px;
+}
+
+#newPW, #lastPW{
+	width: 170%;
+}
+
 input {
 	display: block;
 	padding: 10px;
-
 	width: 100%;
 	margin: 30px 0;
 	font-size: 15px;
@@ -64,11 +96,16 @@ input[type="submit"]:active{
 
 @media (max-width:768px){
 	form{
-		width:75%;
+		width:100%;
 	}
 	
 	div.central{
-		width:75%;
+		width:85%;
+	}
+
+	#newPW, #lastPW{
+		width:70%;
+		min-width: 70%;
 	}
 }
 
@@ -82,6 +119,15 @@ input[type="submit"]:active{
 	
 	div.central{
 		width:95%;
+	}
+
+	div.divedit{
+		margin-left: -80px;
+	}
+
+	#newPW, #lastPW{
+		min-width: 70%;
+		width:70%;
 	}
 }
 
@@ -135,6 +181,15 @@ input[type="submit"]:active{
     background-position: 0 0;
 }
 
+.ocult{
+	display: none;
+}
+
+.user {
+    display: inline-flex;
+    margin-top: 3%;
+    padding-bottom: 1%;
+}
 
 /* custom checkbox*/
 .switch {

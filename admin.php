@@ -18,9 +18,17 @@ if ($_SESSION["logueado"] == TRUE) {
 	<body id="bd">
 		<div class="central">
 			<h2>Administración website</h2>
-			<a href="#" title="Edit Text"> <i class="fas fa-edit fa-2x"> Editar Textos</i></a> <br><br>
+			<a href="textos.php" title="Edit Text"> <i class="fas fa-edit fa-2x"> Editar Textos</i></a> <br><br>
 			<a href="#" title="Edit Img"> <i class="fas fa-images fa-2x"> Editar Imagenes</i></a> <br><br>
-			<a href="usuarios.php" title="Edit Users Adm"> <i class="fas fa-user-shield fa-2x"> Editar User Admin</i></a>
+			<?php
+
+	require './core/connectionSQLite.php';
+	$conn = new connectionSQLite('.');
+
+	if ($conn->isAdmin($_SESSION["usuario_log"])) {
+		echo "<a href='usuarios.php' title='Edit Users Adm'> <i class='fas fa-user-shield fa-2x'> Editar User Admin</i></a>";
+	}
+	?>
 		</div>
 	</body>
 	<div class="footer">
@@ -45,7 +53,7 @@ if ($_SESSION["logueado"] == TRUE) {
 	<?php
 
 } else {
-	header("Location: .\index.html");
+	header("Location: .\index.php");
 }
 
 ?>

@@ -42,7 +42,7 @@ class connectionSQLite {
 	}
 
 	function getUsers() {
-		$querya = $this->getConn()->prepare('SELECT id, full_name, password, role FROM users ;');
+		$querya = $this->getConn()->prepare('SELECT id, full_name FROM users ;');
 
 		$querya->execute();
 
@@ -56,16 +56,27 @@ class connectionSQLite {
 	}
 
 	function getUser($user) {
-		$querya = $this->getConn()->prepare('SELECT id, full_name, password, role FROM users ;');
+		$querya = $this->getConn()->prepare('SELECT id, full_name, password, role FROM users where full_name = :name;');
 
-		$querya->execute();
+		$querya->execute([':name' => $user]);
 
 		$row = $querya->fetch();
 
 		if (is_null($row[1]) or empty($row[1]) or !isset($row[1])) {
 			return false;
 		} elseif (isset($row[1]) and !is_null($row[1])) {
-			return $row[1];
+			return $row;
+		}
+		return false;
+	}
+
+	function isAdmin($user) {
+		$data = $this->getUser($user);
+
+		if ($data["role"] == 1) {
+			return true;
+		} else {
+			return false;
 		}
 		return false;
 	}

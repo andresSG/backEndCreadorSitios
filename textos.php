@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
 <?php
 session_start();
 
-if (!empty($_SESSION["logueado"])) {
-	if ($_SESSION["logueado"] == TRUE) {
-		Header("Location: admin.php");
-	}
-}
-
-?>
+if ($_SESSION["logueado"] == TRUE) {
+	?>
+<html lang="es">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximun-scale=1">
@@ -22,19 +17,8 @@ if (!empty($_SESSION["logueado"])) {
 	</head>
 	<body id="bd">
 		<div class="central">
-			<form action="core/login.php" method="post">
-				<h2>Formulario de acceso</h2>
-				<input type="text" name="user01" placeholder="&#9919;  Usuario">
-				<input type="password" name="pass01" placeholder="&#9919;  Password">
-				<input type="submit" name="submit" value="Login">
-				<?php
-if (isset($_GET["error"])) {
-	if ($_GET["error"] == 'login') {
-		echo "<br><p class='error'><i class='fas fa-exclamation-circle'></i> &nbsp Usuario y / o Contraseña erroneos. Intentelo de nuevo.</p>";
-	}
-}
-?>
-			</form>
+			<h2>Textos</h2>
+
 		</div>
 	</body>
 	<div class="footer">
@@ -50,5 +34,17 @@ if (isset($_GET["error"])) {
         	<i class="fas fa-moon"></i>
     	</div>
 
+    	<div class="exit">
+        	<a href="core/salir.php" title="Exit"><i class="fas fa-door-open"> Exit</i></a>
+    	</div>
+
 	</div>
+
+	<?php
+
+} else {
+	header("Location: .\index.php");
+}
+
+?>
 </html>

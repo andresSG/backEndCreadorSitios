@@ -16,6 +16,7 @@ if (isset($_POST["submit"])) {
 			session_start();
 
 			$_SESSION["logueado"] = TRUE;
+			$_SESSION["usuario_log"] = $loginNombre; //quien se ha logueado
 
 			header("Location: ../admin.php");
 		} else {
