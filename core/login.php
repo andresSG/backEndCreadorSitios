@@ -7,7 +7,7 @@ if (isset($_POST["submit"])) {
 	$conn = new connectionSQLite('..');
 
 	$loginNombre = $_POST["user01"];
-	$loginPassword = md5($_POST["pass01"]);
+	$loginPassword = $_POST["pass01"];
 
 	//$conn->checkPassword($loginNombre, $loginPassword);
 	if (isset($loginNombre) && isset($loginPassword)) {

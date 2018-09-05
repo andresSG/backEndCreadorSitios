@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <?php
+require './core/connectionSQLite.php';
+$conn = new connectionSQLite('.'); //conexion BD
 session_start();
 
 if ($_SESSION["logueado"] == TRUE) {
@@ -21,9 +23,6 @@ if ($_SESSION["logueado"] == TRUE) {
 			<a href="textos.php" title="Edit Text"> <i class="fas fa-edit fa-2x"> Editar Textos</i></a> <br><br>
 			<a href="#" title="Edit Img"> <i class="fas fa-images fa-2x"> Editar Imagenes</i></a> <br><br>
 			<?php
-
-	require './core/connectionSQLite.php';
-	$conn = new connectionSQLite('.');
 
 	if ($conn->isAdmin($_SESSION["usuario_log"])) {
 		echo "<a href='usuarios.php' title='Edit Users Adm'> <i class='fas fa-user-shield fa-2x'> Editar User Admin</i></a>";

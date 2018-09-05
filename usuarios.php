@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <?php
 session_start();
+require 'core/connectionSQLite.php';
+$conn = new connectionSQLite('.');
+
+$usuarios = $conn->getUsers();
 
 if ($_SESSION["logueado"] == TRUE) {
 	?>
@@ -19,12 +23,7 @@ if ($_SESSION["logueado"] == TRUE) {
 		<div class="central">
 			<h2>Usuarios</h2>
 			<script type='text/javascript'>
-<?php
 
-	require 'core/connectionSQLite.php';
-	$conn = new connectionSQLite('.');
-	$usuarios = $conn->getUsers();
-	?>
 			var arr = <?php echo json_encode($usuarios); ?>;
 
 			document.write("<div class='usuarios'>");
@@ -35,15 +34,15 @@ if ($_SESSION["logueado"] == TRUE) {
 				document.write("<input type='hidden' value='"+arr[i]["id"]+"' name='edit'>");
 				document.write("<button id='btEditar' name='btEditar' class='btn btEditar'><i class='fas fa-angle-down fa-3x'></i> Editar </button>");
 				document.write("<div class='divedit'>");
-				document.write("<input type='Password' class='ocult' name='lastPW' id='lastPW' placeholder='Last Password'>");
-				document.write("<input type='Password' class='ocult' name='newPW' id='newPW' placeholder='New Password'>");
+				document.write("<input type='Password' class='ocult' name='lastPW' id='lastPW' placeholder='Last Password' required>");
+				document.write("<input type='Password' class='ocult' name='newPW' id='newPW' placeholder='New Password' required>");
 				document.write("<button id='"+arr[i]["id"]+"' type='submit' value='"+arr[i]["full_name"]+"' name='edit-sn' class='btn btn-success ocult'><i id='"+arr[i]["id"]+"' name='"+arr[i]["full_name"]+"' class='fas fa-user-edit fa-2x'></i> Guardar Cambios </button>");
 				document.write("</div>");
 				document.write("</form>");
 
 				document.write("<form action='./core/users.php' method='POST' accept-charset='utf-8'>");
 				document.write("<input type='hidden' value='"+arr[i]["id"]+"' name='delete'>");
-				document.write("<button id='"+arr[i]["id"]+"' type='submit' name='delete-sn' class='btn btn-success'><i id='"+arr[i]["id"]+"' class='fas fa-user-times fa-2x'></i> Borrar </button>");
+				document.write("<button id='"+arr[i]["id"]+"' type='submit' name='delete-sn' class='btn btn-success' value='"+arr[i]["id"]+"'><i id='"+arr[i]["id"]+"' class='fas fa-user-times fa-2x'></i> Borrar </button>");
 				document.write("</form>");
 				document.write("</div>");
 				document.write("<hr>");
@@ -53,10 +52,22 @@ if ($_SESSION["logueado"] == TRUE) {
 
 			<?php
 if (isset($_GET["d"])) {
-		if ($_GET["d"] == 1) {
-			echo "<br><p class='error'><i class='fas fa-exclamation-circle'></i> &nbsp No se ha podido completar la acción de borrar.</p>";
-		} else {
+		switch ($_GET["d"]) {
+		case 1:
 			echo "<br><p class='info'><i class='far fa-thumbs-up'></i> &nbsp Se completo acción</p>";
+			break;
+
+		case 2:
+			echo "<br><p class='error'><i class='fas fa-exclamation-circle'></i> &nbsp Completa los campos de las contraseñas</p>";
+			break;
+
+		case 3:
+			echo "<br><p class='error'><i class='fas fa-exclamation-circle'></i> &nbsp Las contraseñas no coinciden, prueba otra vez.</p>";
+			break;
+
+		default:
+			echo "<br><p class='error'><i class='fas fa-exclamation-circle'></i> &nbsp No se pudo completar la acción seleccionada.</p>";
+			break;
 		}
 	}
 	?>
