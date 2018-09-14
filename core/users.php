@@ -2,11 +2,10 @@
 session_start();
 if ($_SESSION["logueado"] == TRUE) {
 	require './connectionSQLite.php';
-
 	$conn = new connectionSQLite('..');
 
 	if (isset($_POST['edit-sn'])) {
-//editar
+		//editar user
 		$edit = $_POST['edit-sn'];
 
 		if (isset($_POST['lastPW']) && isset($_POST['newPW'])) {

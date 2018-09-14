@@ -20,7 +20,7 @@ if ($_SESSION["logueado"] == TRUE) {
 	</head>
 	<body id="bd">
 		<div class="central">
-			<h2>Textos</h2>
+			<h2>Editar Texto</h2>
 			<script type='text/javascript'>
 			var arr = <?php echo json_encode($textos); ?>;
 			document.write("<table class='texts'>");
@@ -28,30 +28,15 @@ if ($_SESSION["logueado"] == TRUE) {
 			document.write("<th> Key </th><th> Spa </th><th> Ing </th><th> Action </th>");
 			document.write("</thead>");
 			for (var i = 0; i < (arr.length); i++) {
-
 				document.write("<tr>");
-				document.write("<td class='clave'> "+arr[i]["key"]+"</td>"+
+				document.write("<td> "+arr[i]["key"]+"</td>"+
 					"<td> "+arr[i]["ES"]+" </td>"+
 					"<td> "+arr[i]["EN"]+"</td>"+
-					"<td> <form action='./core/texts.php' method='POST' accept-charset='utf-8'> "+
-					"<input type='hidden' value='"+arr[i]["id"]+"' name='id1'>"+
-					"<input type='hidden' value='"+arr[i]["key"]+"' name='key1'>"+
-					"<input type='submit' value='editTexts' name='editTexts'>"+
-					"<input type='submit' value='delTexts' name='delTexts'></form></td>");
+					"<td> Button </td>");
 				document.write("</tr>");
 			}
 			document.write("</table>");
 			</script>
-			<?php
-if (isset($_GET["d"])) {
-		if ($_GET["d"] == 1) {
-			echo "<br><p class='info'><i class='far fa-thumbs-up'></i> &nbsp Se completo accion</p>";
-		}
-		if ($_GET["d"] == 2) {
-			echo "<br><p class='error'><i class='fas fa-exclamation-circle'></i> &nbsp No se pudo completar accion</p>";
-		}
-	}
-	?>
 		</div>
 	</body>
 	<div class="footer">

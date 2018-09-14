@@ -68,6 +68,33 @@ button.ocult{
 	width: 170%;
 }
 
+/** table prop */
+th {
+    background-color: #303030;
+    color: white;
+}
+
+td {
+	padding: 5px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+}
+
+td > form > input {
+	font-size: 1em;
+	margin: 4px auto auto auto;
+}
+
+tr:hover {background-color: #EAECEC;}
+
+td.clave {
+	color: #C20606;
+	font-weight: bold;
+}
+
+/** forms prop 	*/
 input {
 	display: block;
 	padding: 10px;
@@ -116,6 +143,11 @@ input[type="submit"]:active{
 	form{
 		width:95%;
 	}
+
+	table {
+       display: block;
+       overflow-x: auto;
+     }
 	
 	div.central{
 		width:95%;
