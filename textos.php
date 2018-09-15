@@ -25,7 +25,7 @@ if ($_SESSION["logueado"] == TRUE) {
 			var arr = <?php echo json_encode($textos); ?>;
 			document.write("<table class='texts'>");
 			document.write("<thead>");
-			document.write("<th> Key </th><th> Spa </th><th> Ing </th><th> Action </th>");
+			document.write("<th> Key </th><th> Spa </th><th> Eng </th><th> Action </th>");
 			document.write("</thead>");
 			for (var i = 0; i < (arr.length); i++) {
 
@@ -48,7 +48,8 @@ if (isset($_GET["d"])) {
 			echo "<br><p class='info'><i class='far fa-thumbs-up'></i> &nbsp Se completo accion</p>";
 		}
 		if ($_GET["d"] == 2) {
-			echo "<br><p class='error'><i class='fas fa-exclamation-circle'></i> &nbsp No se pudo completar accion</p>";
+			echo "<br><p class='error'><i class='fas fa-exclamation-circle'>" .
+				"</i> &nbsp No se pudo completar accion</p>";
 		}
 	}
 	?>

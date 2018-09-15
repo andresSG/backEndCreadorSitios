@@ -92,9 +92,9 @@ class connectionSQLite {
 		$querya->execute();
 		$row = $querya->fetchAll();
 
-		if (is_null($row[1]) or empty($row[1]) or !isset($row[1])) {
+		if (is_null($row) or empty($row) or !isset($row)) {
 			return false;
-		} elseif (isset($row[1]) and !is_null($row[1])) {
+		} elseif (isset($row) and !is_null($row)) {
 			return $row;
 		}
 		return false;
@@ -117,6 +117,27 @@ class connectionSQLite {
 		} else {
 			return false;
 		}
+
+		if ($executeES and $executeEN) {
+			return true;
+		} else {
+			return false;
+		}
+		return false;
+	}
+
+	function updateString($key, $spanish, $english) {
+		//cambiar a query transact
+		$querya = $this->getConn()->prepare('update ES set value = :spanish where id = :key;');
+		$queryb = $this->getConn()->prepare('update EN set value = :english where id = :key;');
+
+		$querya->bindValue(':key', $key);
+		$querya->bindValue(':spanish', $spanish);
+		$queryb->bindValue(':key', $key);
+		$queryb->bindValue(':english', $english);
+
+		$executeES = $querya->execute();
+		$executeEN = $queryb->execute();
 
 		if ($executeES and $executeEN) {
 			return true;

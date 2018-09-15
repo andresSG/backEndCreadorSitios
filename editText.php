@@ -3,7 +3,20 @@
 session_start();
 require 'core/connectionSQLite.php';
 $conn = new connectionSQLite('.');
-$textos = $conn->getStrings();
+
+if (isset($_SESSION["ident"]) && isset($_SESSION["clave"])) {
+	$clave = $_SESSION["clave"];
+	$identificador = $_SESSION["ident"];
+
+	unset($_SESSION["clave"]);
+	unset($_SESSION["ident"]);
+}
+//obtenemos un valor según los parametros recogidos
+if (isset($identificador)) {
+	$textos = $conn->getString($identificador);
+} else {
+	header("Location: ./textos.php");
+}
 
 if ($_SESSION["logueado"] == TRUE) {
 	?>
@@ -25,15 +38,21 @@ if ($_SESSION["logueado"] == TRUE) {
 			var arr = <?php echo json_encode($textos); ?>;
 			document.write("<table class='texts'>");
 			document.write("<thead>");
-			document.write("<th> Key </th><th> Spa </th><th> Ing </th><th> Action </th>");
+			document.write("<th> Key </th><th> Spa </th><th> Eng </th><th> Action </th>");
 			document.write("</thead>");
 			for (var i = 0; i < (arr.length); i++) {
 				document.write("<tr>");
-				document.write("<td> "+arr[i]["key"]+"</td>"+
+				document.write("<td class='clave'> "+arr[i]["key"]+"</td>"+
 					"<td> "+arr[i]["ES"]+" </td>"+
 					"<td> "+arr[i]["EN"]+"</td>"+
-					"<td> Button </td>");
-				document.write("</tr>");
+					"<td> <form action='./core/texts.php' method='POST' id='edit' accept-charset='utf-8'> "+
+					"<input type='hidden' value='"+arr[i]["id"]+"' name='id1'>"+
+					"<input type='hidden' value='"+arr[i]["key"]+"' name='key1'>"+
+					"</td></tr>");
+				document.write("<tr><td> new values -> </td>"+
+					"<td><textarea rows='4' cols='30' name='newES' form='edit'>"+ arr[i]["ES"] +"</textarea></td>"+
+					"<td><textarea rows='4' cols='30' name='newEN' form='edit'>"+ arr[i]["EN"] +"</textarea></td>"+
+					"<td><input type='submit' value='Guardar' name='modText'></td></form></tr>");
 			}
 			document.write("</table>");
 			</script>

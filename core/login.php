@@ -23,6 +23,8 @@ if (isset($_POST["submit"])) {
 			Header("Location: ../index.php?error=login");
 		}
 
+	} else {
+		header("Location: ../index.php");
 	}
 
 } else {
