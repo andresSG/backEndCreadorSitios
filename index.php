@@ -3,6 +3,12 @@
 <?php
 session_start();
 
+if (isset($_SESSION['nightMode'])) {
+	echo '<script> var night= "' . $_SESSION['nightMode'] . '"; </script>';
+} else {
+	echo '<script> var night;</script>';
+}
+
 if (!empty($_SESSION["logueado"])) {
 	if ($_SESSION["logueado"] == TRUE) {
 		Header("Location: admin.php");

@@ -4,6 +4,12 @@ session_start();
 require 'core/connectionSQLite.php';
 $conn = new connectionSQLite('.');
 
+if (isset($_SESSION['nightMode'])) {
+	echo '<script> var night= "' . $_SESSION['nightMode'] . '"; </script>';
+} else {
+	echo '<script> var night;</script>';
+}
+
 if (isset($_SESSION["ident"]) && isset($_SESSION["clave"])) {
 	$clave = $_SESSION["clave"];
 	$identificador = $_SESSION["ident"];

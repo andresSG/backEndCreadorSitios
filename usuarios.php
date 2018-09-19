@@ -6,6 +6,12 @@ $conn = new connectionSQLite('.');
 
 $usuarios = $conn->getUsers();
 
+if (isset($_SESSION['nightMode'])) {
+	echo '<script> var night= "' . $_SESSION['nightMode'] . '"; </script>';
+} else {
+	echo '<script> var night;</script>';
+}
+
 if ($_SESSION["logueado"] == TRUE) {
 	?>
 <html lang="es">
