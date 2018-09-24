@@ -48,6 +48,7 @@ if ($_SESSION["logueado"] == TRUE) {
 
 				document.write("<form action='./core/users.php' method='POST' accept-charset='utf-8'>");
 				document.write("<input type='hidden' value='"+arr[i]["id"]+"' name='delete'>");
+				document.write("<input type='hidden' value='"+arr[i]["full_name"]+"' name='delete-n'>");
 				document.write("<button id='"+arr[i]["id"]+"' type='submit' name='delete-sn' class='btn btn-success' value='"+arr[i]["id"]+"'><i id='"+arr[i]["id"]+"' class='fas fa-user-times fa-2x'></i> Borrar </button>");
 				document.write("</form>");
 				document.write("</div>");
@@ -69,6 +70,10 @@ if (isset($_GET["d"])) {
 
 		case 3:
 			echo "<br><p class='error'><i class='fas fa-exclamation-circle'></i> &nbsp Las contraseñas no coinciden, prueba otra vez.</p>";
+			break;
+
+		case 4:
+			echo "<br><p class='error'><i class='fas fa-exclamation-triangle'></i> &nbsp No se puede eliminar usuario Administrador logueado.</p>";
 			break;
 
 		default:

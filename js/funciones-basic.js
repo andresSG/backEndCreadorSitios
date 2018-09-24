@@ -56,10 +56,30 @@ function init(){
         }
         $('#'+evt.currentTarget.parentElement.parentElement.id+' .ocult').fadeIn(1000);
     });
+
+    $("input[name='delTexts']").click(function(evt){
+        confirmAction(evt);
+    });
+
+    $("input[name='delete-sn']").click(function(evt){
+        confirmAction(evt);
+    });
+    
 }
 
 function checkNight(){
     if(night === 'yes'){
         $("#tooglenight").click();
     }
+}
+
+function confirmAction(elemen){
+    var isConfirmed = confirm('No se puede deshacer ¿Estas seguro?');
+
+    if(isConfirmed){
+        elemen.currentTarget.parentNode.submit();
+    }else{
+        elemen.preventDefault();
+    }
+    
 }

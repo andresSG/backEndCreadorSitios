@@ -18,12 +18,16 @@ if ($_SESSION["logueado"] == TRUE) {
 			accionBack(2);
 		}
 	}
-
+	//delete user
 	if (isset($_POST['delete-sn'])) {
-		//delete user
-		$idDel = $_POST['delete-sn'];
+		//si es usuario logueado y tiene acceso a la pantalla, es admin
+		if ($_SESSION["usuario_log"] == $_POST['delete-n']) {
+			accionBack(4);
+		} else {
+			$idDel = $_POST['delete-sn'];
 
-		accionBack($conn->removeUser($idDel));
+			accionBack($conn->removeUser($idDel));
+		}
 	}
 
 } else {
@@ -43,6 +47,10 @@ function accionBack($valor) {
 
 	case 3:
 		header("Location: ../usuarios.php?d=3"); //las passw no coinciden
+		break;
+
+	case 4:
+		header("Location: ../usuarios.php?d=4"); //Se intenta eliminar usuario admin logueado
 		break;
 
 	default:
