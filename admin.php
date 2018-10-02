@@ -59,6 +59,7 @@ if ($_SESSION["logueado"] == TRUE) {
 
 } else {
 	header("Location: .\index.php");
+	echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/index.php' </script>";
 }
 
 ?>

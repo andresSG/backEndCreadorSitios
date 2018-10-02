@@ -19,15 +19,19 @@ if (isset($_POST["submit"])) {
 			$_SESSION["usuario_log"] = $loginNombre; //quien se ha logueado
 
 			header("Location: ../admin.php");
+			echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/index.php'</script>";
 		} else {
 			Header("Location: ../index.php?error=login");
+			echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/index.php?error=login'</script>";
 		}
 
 	} else {
 		header("Location: ../index.php");
+		echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/index.php'</script>";
 	}
 
 } else {
 	header("Location: ../index.php");
+	echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/index.php'</script>";
 }
 ?>

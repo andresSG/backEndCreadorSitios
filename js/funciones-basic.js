@@ -74,12 +74,19 @@ function checkNight(){
 }
 
 function confirmAction(elemen){
-    var isConfirmed = confirm('No se puede deshacer ¿Estas seguro?');
-
-    if(isConfirmed){
-        elemen.currentTarget.parentNode.submit();
-    }else{
-        elemen.preventDefault();
-    }
+    try {
     
+        if(window.confirm('No se puede deshacer ¿Estas seguro?')){
+            elemen.currentTarget.parentNode.submit();
+            return true;
+        }else{
+            elemen.preventDefault();
+            return false;
+        }
+    } catch (e) {
+        elemen.preventDefault();
+        //confirmAction(elemen);
+        //console.log("error : " + e);
+    }
+    return false;
 }

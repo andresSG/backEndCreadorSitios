@@ -6,6 +6,7 @@ if (isset($_POST['nightMode'])) {
 	echo "night mode: " . $_SESSION['nightMode'];
 } else {
 	header("Location: ../index.php");
+	echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/index.php' </script>";
 }
 
 ?>

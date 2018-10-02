@@ -32,6 +32,7 @@ if ($_SESSION["logueado"] == TRUE) {
 
 } else {
 	Header("Location: ../index.php");
+	echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/index.php' </script>";
 }
 
 function accionBack($valor) {
@@ -39,22 +40,27 @@ function accionBack($valor) {
 	switch ($valor) {
 	case 1:
 		header("Location: ../usuarios.php?d=1"); //accion completada
+		echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/usuarios.php?d=1'</script>";
 		break;
 
 	case 2:
 		header("Location: ../usuarios.php?d=2"); //no se han recibido datos de las passw
+		echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/usuarios.php?d=2'</script>";
 		break;
 
 	case 3:
 		header("Location: ../usuarios.php?d=3"); //las passw no coinciden
+		echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/usuarios.php?d=3'</script>";
 		break;
 
 	case 4:
 		header("Location: ../usuarios.php?d=4"); //Se intenta eliminar usuario admin logueado
+		echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/usuarios.php?d=4'</script>";
 		break;
 
 	default:
 		Header("Location: ../usuarios.php?d=0"); //se han producido errores
+		echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/usuarios.php?d=0'</script>";
 		break;
 	}
 }

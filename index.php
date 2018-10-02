@@ -12,6 +12,7 @@ if (isset($_SESSION['nightMode'])) {
 if (!empty($_SESSION["logueado"])) {
 	if ($_SESSION["logueado"] == TRUE) {
 		Header("Location: admin.php");
+		echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/admin.php' </script>";
 	}
 }
 

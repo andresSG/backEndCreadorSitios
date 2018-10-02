@@ -85,6 +85,21 @@ class connectionSQLite {
 		return false;
 	}
 
+	function getAllStrings() {
+		$querya = $this->getConn()->prepare(
+			'SELECT ES.id, ES.key, ES.value as "ES", EN.value as "EN" from ES, EN where ES.id = EN.id order by ES.id;');
+
+		$querya->execute();
+		$row = $querya->fetchAll(PDO::FETCH_ASSOC);
+
+		if (is_null($row) or empty($row) or !isset($row)) {
+			return false;
+		} elseif (isset($row) and !is_null($row)) {
+			return $row;
+		}
+		return false;
+	}
+
 	function getString($id) {
 		$querya = $this->getConn()->prepare('SELECT ES.id, ES.key, ES.value "ES", EN.value "EN" from ES, EN where ES.id = EN.id and ES.id = :id;');
 

@@ -13,6 +13,7 @@ if ($_SESSION["logueado"] == TRUE) {
 		$_SESSION["clave"] = $_POST['key1'];
 		$_SESSION["ident"] = $_POST['id1'];
 		Header("Location: ../editText.php");
+		echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/editText.php'</script>";
 	} else {
 		$no_edit = true;
 	}
@@ -23,9 +24,11 @@ if ($_SESSION["logueado"] == TRUE) {
 		if ($conn->delString($_POST['id1'])) {
 			//success
 			Header("Location: ../textos.php?d=1");
+			echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/textos.php?d=1'</script>";
 		} else {
 			//fail
 			Header("Location: ../textos.php?d=2");
+			echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/textos.php?d=2'</script>";
 		}
 	} else {
 		$no_del = true;
@@ -35,8 +38,10 @@ if ($_SESSION["logueado"] == TRUE) {
 	if (isset($_POST['modText'])) {
 		if ($conn->updateString($_POST['id1'], $_POST['newES'], $_POST['newEN'])) {
 			Header("Location: ../textos.php?d=1");
+			echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/textos.php?d=1'</script>";
 		} else {
 			Header("Location: ../textos.php?d=2");
+			echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/textos.php?d=2'</script>";
 		}
 	} else {
 		$no_mod = true;
@@ -45,9 +50,11 @@ if ($_SESSION["logueado"] == TRUE) {
 	//si se hace una llamada no controlada por los formularios
 	if ($no_del && $no_edit && $no_mod) {
 		header("Location: ../index.php");
+		echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/index.php'</script>";
 	}
 
 } else {
 	Header("Location: ../index.php");
+	echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/index.php'</script>";
 }
 ?>

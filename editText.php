@@ -22,6 +22,7 @@ if (isset($identificador)) {
 	$textos = $conn->getString($identificador);
 } else {
 	header("Location: ./textos.php");
+	echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/textos.php' </script>";
 }
 
 if ($_SESSION["logueado"] == TRUE) {
@@ -87,6 +88,7 @@ if ($_SESSION["logueado"] == TRUE) {
 
 } else {
 	header("Location: .\index.php");
+	echo "<script> location.pathname = '/'+location.pathname.split('/')[1]+'/index.php' </script>";
 }
 
 ?>
