@@ -65,6 +65,18 @@ function init(){
         confirmAction(evt);
     });
     
+    $("input[name='isIMG']").click(function(evt){
+        if(this.checked){
+            $("input[name='newIsIMG']")[0].value = "true";
+            this.value = "true";
+            this.checked = true;
+        }else{
+            $("input[name='newIsIMG']")[0].value = "false";
+            this.value = "false";
+            this.checked = false;
+        }
+    });
+
 }
 
 function checkNight(){

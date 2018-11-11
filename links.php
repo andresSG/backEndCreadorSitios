@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <?php
-require './core/connectionSQLite.php';
-$conn = new connectionSQLite('.'); //conexion BD
 session_start();
+require 'core/connectionSQLite.php';
+$conn = new connectionSQLite('.');
+$links = $conn->getAllLinks();
 
 if (isset($_SESSION['nightMode'])) {
 	echo '<script> var night= "' . $_SESSION['nightMode'] . '"; </script>';
@@ -25,19 +26,48 @@ if ($_SESSION["logueado"] == TRUE) {
 	</head>
 	<body id="bd">
 		<div class="central">
-			<h2>Administración website</h2>
-			<div class="enlaces">
-			<a href="textos.php" title="Edit Text"> <i class="fas fa-edit fa-2x"> Editar Textos</i></a> <br><br>
-			<!--<a href="#" title="Edit Img"> <i class="fas fa-images fa-2x"> Editar Imagenes</i></a> <br><br>-->
-			<a href="links.php" title="Edit Link"> <i class="fas fa-link fa-2x"> Editar Links</i></a> <br><br>
-			<!--<a href="#" title="Edit contact-data"> <i class="fas fa-coments fa-2x"> Editar Datos contacto</i></a> <br><br>-->
+			<h2>Links</h2>
+			<script type='text/javascript'>
+			var arr = <?php echo json_encode($links); ?>;
+			document.write("<table class='texts'>");
+			document.write("<thead>");
+			document.write("<th> Key </th><th> Link </th><th> Image </th><th> Action </th>");
+			document.write("</thead>");
+			for (var i = 0; i < (arr.length); i++) {
 
+				document.write("<tr>");
+
+				document.write("<td class='clave'> "+arr[i]["key"]+"</td>"+
+					"<td> "+arr[i]["link"]+" </td>"+
+					"<td> ");
+				if(arr[i]["isIMG"] === 'true'){
+					document.write("<i class='fas fa-check'></i>");
+				}else{
+					document.write("<i class='fas fa-times'></i>");
+				}
+				document.write("</td>"+
+					"<td> <form action='./core/links.php' method='POST' accept-charset='utf-8'> "+
+					"<input type='hidden' value='"+arr[i]["id"]+"' name='id1'>"+
+					"<input type='hidden' value='"+arr[i]["key"]+"' name='key1'>"+
+					"<input type='submit' value='editLinks' name='editLinks'>"
+					// +"<input type='submit' value='delLinks' name='delLinks'>"
+					+"</form></td>"
+					);
+				document.write("</tr>");
+			}
+			document.write("</table>");
+			</script>
 			<?php
-
-	if ($conn->isAdmin($_SESSION["usuario_log"])) {
-		echo "<a href='usuarios.php' title='Edit Users Adm'> <i class='fas fa-user-shield fa-2x'> Editar User Admin</i></a>";
+if (isset($_GET["d"])) {
+		if ($_GET["d"] == 1) {
+			echo "<br><p class='info'><i class='far fa-thumbs-up'></i> &nbsp Se completo accion</p>";
+		}
+		if ($_GET["d"] == 2) {
+			echo "<br><p class='error'><i class='fas fa-exclamation-circle'>" .
+				"</i> &nbsp No se pudo completar accion</p>";
+		}
 	}
-	?>		</div>
+	?>
 		</div>
 	</body>
 	<div class="footer">

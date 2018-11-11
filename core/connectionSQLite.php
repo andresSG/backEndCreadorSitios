@@ -85,6 +85,20 @@ class connectionSQLite {
 		return false;
 	}
 
+	function getAllLinks() {
+		$querya = $this->getConn()->prepare('SELECT * from links');
+
+		$querya->execute();
+		$row = $querya->fetchAll(PDO::FETCH_ASSOC);
+
+		if (is_null($row) or empty($row) or !isset($row)) {
+			return false;
+		} elseif (isset($row) and !is_null($row)) {
+			return $row;
+		}
+		return false;
+	}
+
 	function getAllStrings() {
 		$querya = $this->getConn()->prepare(
 			'SELECT ES.id, ES.key, ES.value as "ES", EN.value as "EN" from ES, EN where ES.id = EN.id order by ES.id;');
@@ -113,6 +127,34 @@ class connectionSQLite {
 			return $row;
 		}
 		return false;
+	}
+
+	function getLink($id) {
+		$querya = $this->getConn()->prepare('SELECT * from links where id = :id;');
+
+		$querya->bindValue(':id', $id);
+		$querya->execute();
+		$row = $querya->fetchAll();
+
+		if (is_null($row) or empty($row) or !isset($row)) {
+			return false;
+		} elseif (isset($row) and !is_null($row)) {
+			return $row;
+		}
+		return false;
+	}
+
+	function updateLink($key, $link, $isIMG) {
+		//cambiar a query transact
+		$query = $this->getConn()->prepare('update links set link = :link, isIMG = :isIMG where id = :key;');
+
+		$query->bindValue(':key', $key);
+		$query->bindValue(':link', $link);
+		$query->bindValue(':isIMG', $isIMG);
+
+		$executeLINK = $query->execute();
+
+		return $executeLINK;
 	}
 
 	function insertString($key, $spanish, $english) {
